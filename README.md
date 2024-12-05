@@ -1,2 +1,2 @@
-# React-Notes-App
+# React Notes App
 A React notes app.
