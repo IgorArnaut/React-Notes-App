@@ -12,25 +12,32 @@ function Note({ note }) {
 
 export default function App() {
   const noteList = [
-    { title: "Lorem ipsum", date: "2024-12-06", text: "Lorem ipsum dolor sit amet" },
-    { title: "Consectetur", date: "2024-12-06", text: "Consectetur adipiscing elit" },
-    { title: "Sed do eiusmod", date: "2024-12-06", text: "Sed do eiusmod tempor incididunt" },
+    { title: "Lorem ipsum", date: "12/6/2024", text: "Lorem ipsum dolor sit amet" },
+    { title: "Consectetur", date: "12/6/2024", text: "Consectetur adipiscing elit" },
+    { title: "Sed do eiusmod", date: "12/6/2024", text: "Sed do eiusmod tempor incididunt" },
   ];
 
   const [notes, setNotes] = useState(noteList);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target.title.value);
-    console.log(e.target.text.value);
+    if (e.target.title.value === "") return;
+    if (e.target.text.value === "") return;
+    const newNote = {
+      title: e.target.title.value,
+      date: new Date().toLocaleDateString("en-US"),
+      text: e.target.text.value,
+    };
+    console.log(newNote);
+    setNotes([...notes, newNote]);
   };
 
   return (
     <>
-      {noteList.map((note, i) => (
+      {notes.map((note, i) => (
         <Note key={i} note={note} />
       ))}
-      
+
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">Title</label>
         <input type="text" id="title" />
