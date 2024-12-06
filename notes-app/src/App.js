@@ -1,20 +1,13 @@
 import { useState } from "react";
 import moment from "moment";
 
-function Note({ note }) {
-  return (
-    <div>
-      <h1>{note.title}</h1>
-      <h2>{note.date}</h2>
-      <p>{note.text}</p>
-    </div>
-  );
-}
+import Note from "./Note";
+import NoteForm from "./NoteForm";
 
 export default function App() {
   const noteList = [];
   const [notes, setNotes] = useState(noteList);
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (e.target.title.value === "") return;
@@ -33,16 +26,7 @@ export default function App() {
       {notes.map((note, i) => (
         <Note key={i} note={note} />
       ))}
-
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Title</label>
-        <input type="text" id="title" />
-        <br />
-        <label htmlFor="text">Title</label>
-        <textarea id="text"></textarea>
-        <br />
-        <input type="submit" value="Submit" />
-      </form>
+      <NoteForm handleSubmit={handleSubmit} />
     </>
   );
 }
