@@ -1,4 +1,5 @@
 import { useState } from "react";
+import moment from "moment";
 
 function Note({ note }) {
   return (
@@ -11,21 +12,16 @@ function Note({ note }) {
 }
 
 export default function App() {
-  const noteList = [
-    { title: "Lorem ipsum", date: "12/6/2024", text: "Lorem ipsum dolor sit amet" },
-    { title: "Consectetur", date: "12/6/2024", text: "Consectetur adipiscing elit" },
-    { title: "Sed do eiusmod", date: "12/6/2024", text: "Sed do eiusmod tempor incididunt" },
-  ];
-
+  const noteList = [];
   const [notes, setNotes] = useState(noteList);
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (e.target.title.value === "") return;
     if (e.target.text.value === "") return;
     const newNote = {
       title: e.target.title.value,
-      date: new Date().toLocaleDateString("en-US"),
+      date: moment().format("MM/DD/yyyy hh:mm"),
       text: e.target.text.value,
     };
     console.log(newNote);
